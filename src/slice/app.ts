@@ -43,4 +43,6 @@ const slice = createSlice({
 })
 
 
+export const  {  setCapsLock , setCommandLine , setTheme} = slice.actions
+ 
 export default slice.reducer

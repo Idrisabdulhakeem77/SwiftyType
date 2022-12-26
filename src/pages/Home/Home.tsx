@@ -3,14 +3,14 @@
 
 
 interface HomeProps {
-     
+    setRandomTheme : () => void 
 }
 
 
-const Home = () => {
+const Home = ( { setRandomTheme} : HomeProps ) => {
      return (
         <div>
-            
+             Home
         </div>
      )
      

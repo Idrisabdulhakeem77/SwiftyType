@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import appReducer from '../slice/app'
+import configReducer from '../slice/config'
 
 
 
 const store = configureStore({
     reducer: {
-        app: appReducer
+        app: appReducer,
+        config: configReducer
     }
 })
 
