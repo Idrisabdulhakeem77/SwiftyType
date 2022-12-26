@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./app/App";
 
 import { Provider } from "react-redux";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import store from "./app/store";
 
 const root = ReactDOM.createRoot(
@@ -13,7 +14,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <HashRouter>
+        <Routes>
+          <Route path="/*" element={<App />} />
+        </Routes>
+      </HashRouter>
     </Provider>
   </React.StrictMode>
 );
