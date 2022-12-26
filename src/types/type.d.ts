@@ -1,4 +1,4 @@
-declare namespace ApeTypes {
+declare namespace SwiftTypes {
     interface Config {
         mode: 'time' | 'words' | 'zen';
         time: number;
