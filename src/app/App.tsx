@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "./hooks";
 import { ThemeProvider } from "styled-components";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Home } from "../pages";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import themes from "../themes/_list";
 import { setTheme } from "../slice/app";
 import { setThemeName } from "../slice/config";
@@ -25,13 +25,20 @@ const App = () => {
     favoriteThemes,
   } = config;
 
+
+  // Default value for the randomTheme is "on"
   const setRandomTheme = useCallback(async () => {
     if (randomTheme === "off") return;
-    let filteredThemes = themes.filter((t) => t.name !== themeName);
 
+    // removing themeName from array of themes
+    let filteredThemes = themes.filter((t) => t.name !== themeName);
+   
+    // remove themes with either light ot darkmode
     if (randomTheme === "light" || randomTheme === "dark") {
       filteredThemes = filteredThemes.filter((t) => t.mode === randomTheme);
-    } else if (randomTheme === "favorite") {
+    } 
+    
+    else if (randomTheme === "favorite") {
       filteredThemes = filteredThemes.filter((t) =>
         favoriteThemes.includes(t.name)
       );
@@ -39,6 +46,7 @@ const App = () => {
 
     const newTheme =
       filteredThemes[Math.floor(Math.random() * filteredThemes.length)];
+
     if (newTheme) {
       dispatch(setThemeName(newTheme.name));
     }
