@@ -41,4 +41,8 @@ declare namespace SwiftTypes {
         outOfFocusWarning: 'hide' | 'show';
         capsLockWarning: 'hide' | 'show';
     }
+
+    interface Word {
+         
+    }
 }
