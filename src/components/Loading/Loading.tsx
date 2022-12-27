@@ -1,11 +1,11 @@
-
-
-
+import Styled from "./loading.styles";
 
 const Loading = () => {
-    return (
-        
-    )
-}
+  return (
+    <Styled.Container>
+      <Styled.Loading />
+    </Styled.Container>
+  );
+};
 
-export default Loading
+export default Loading;
