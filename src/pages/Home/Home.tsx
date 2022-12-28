@@ -1,6 +1,7 @@
 import Styled from "./Home.styles";
 import { AnimatePresence } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import Loading from "../../components/Loading/Loading";
 
 interface HomeProps {
   setRandomTheme: () => void;
@@ -20,12 +21,20 @@ const Home = ({ setRandomTheme }: HomeProps) => {
     keyTips,
   } = useAppSelector(({ config }) => config);
 
-
-  const {isTyping , isFinished , isTestPopupOpen , testLanguage } = useAppSelector(({type}) => type)
+  const { isTyping, isFinished, isTestPopupOpen, testLanguage } =
+    useAppSelector(({ type }) => type);
 
   return (
     <Styled.Home>
-      <AnimatePresence exitBeforeEnter></AnimatePresence>
+      <AnimatePresence exitBeforeEnter>
+        {!testLanguage.words.length ? (
+          <Loading />
+        ) : isFinished ? (
+          <Styled.Wrapper key="results"></Styled.Wrapper>
+        ) : (
+          <Styled.Wrapper></Styled.Wrapper>
+        )}
+      </AnimatePresence>
     </Styled.Home>
   );
 };

@@ -14,6 +14,17 @@ const Home = styled(m.div).attrs({
   padding-bottom: 70px;
 `;
 
-const Styled = { Home };
+const Wrapper = styled(m.div).attrs((props) => ({
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+}))`
+  position: relative;
+  display: flex;
+  gap: 18px;
+  flex-direction: column;
+`;
+
+const Styled = { Home, Wrapper };
 
 export default Styled;
