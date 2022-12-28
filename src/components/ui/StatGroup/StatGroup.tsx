@@ -14,9 +14,13 @@ interface StateGroupProps {
 const StatGroup = ({ title, values }: StateGroupProps) => {
   return (
     <Styled.Group>
-      <Styled.Title>
-         
-      </Styled.Title>
+      <Styled.Title $size={title.size}>{title.text}</Styled.Title>
+
+      {values.map(({ text, size }) => (
+        <Styled.Value $size={size} key={text}>
+          {text}
+        </Styled.Value>
+      ))}
     </Styled.Group>
   );
 };

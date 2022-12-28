@@ -28,9 +28,20 @@ const TestResults = () => {
             {
               text: `${showDecimalPlaces === "on" ? +wpm.toFixed(2) : intWpm}`,
               size: 64,
-            }
+            },
           ]}
         />
+        {/* <StatGroup
+          title={{ text: "acc", size: 32 }}
+          values={[
+            {
+              text: `${
+                showDecimalPlaces === "on" ? +accuracy.toFixed(2) : intAccuracy
+              }%`,
+              size: 64,
+            },
+          ]}
+        /> */}
       </Styled.Stats>
     </Styled.TestResults>
   );
