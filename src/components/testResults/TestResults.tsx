@@ -1,15 +1,7 @@
-import Styled from "./testResults.styles"
-
+import Styled from "./testResults.styles";
 
 const TestResults = () => {
-     return (
-         <Styled.Wrapper>
-Test resultsI
-         </Styled.Wrapper>
-            
-        
-     )
-}
+  return <Styled.TestResults>Test results</Styled.TestResults>;
+};
 
-
-export default TestResults
+export default TestResults;

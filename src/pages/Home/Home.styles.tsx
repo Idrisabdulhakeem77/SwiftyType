@@ -2,7 +2,7 @@ import { m } from "framer-motion";
 import styled from "styled-components";
 
 const Home = styled(m.div).attrs({
-  initial: { opacity: 0 },
+  initial: { opacity: 1 },
   exit: { opacity: 0 },
   animate: { opacity: 1 },
 })`
@@ -15,7 +15,7 @@ const Home = styled(m.div).attrs({
 `;
 
 const Wrapper = styled(m.div).attrs((props) => ({
-  initial: { opacity: 0 },
+  initial: { opacity: 1 }, //Swap back initial opacity back to Zero
   animate: { opacity: 1 },
   exit: { opacity: 0 },
 }))`

@@ -1,13 +1,18 @@
-import {m} from 'framer-motion'
+
 import styled from 'styled-components'
 
+const TestResults = styled.div``
 
 
-const Wrapper = styled(m.div).attrs(() => ( { }))``
+const Wrapper = styled.div``
 
 
+const Stats  = styled.div``
 
-const Styled = {Wrapper}
+const MoreStats = styled(Stats)
+
+
+const Styled = {TestResults , Wrapper , Stats ,   MoreStats }
 
 
 export default Styled
