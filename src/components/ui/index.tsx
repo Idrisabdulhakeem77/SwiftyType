@@ -1,1 +1,1 @@
-export { default as ChartGroup} from './ChartGroup/ChartGroup'
+export { default as StatGroup} from './StatGroup/StatGroup'
