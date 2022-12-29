@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Button = styled.button<{ $active: boolean }>`
+const Button = styled.button<{ $active?: boolean }>`
   padding: 8px;
   display: flex;
   align-items: center;
@@ -26,9 +26,30 @@ const Button = styled.button<{ $active: boolean }>`
   }
 `;
 
-const TextButton = styled(Button)<{ $active: boolean }>``;
+const TextButton = styled(Button)<{ $active?: boolean }>`
+  && {
+    background: transparent;
+  }
+  
+  color: ${(p) => (p.$active ? p.theme.main : p.theme.sub)};
 
-const AltButton = styled(TextButton)``;
+  &:hover,
+  &:focus {
+    color: ${(p) => p.theme.text};
+  }
+  &:active {
+    transform: none;
+  }
+`;
+
+const AltButton = styled(TextButton)`
+  &:active,
+  &:focus {
+    background: ${(p) => p.theme.text};
+    color: ${(p) => p.theme.bg};
+    transform: scale(0.925);
+  }
+`;
 
 const Styled = { Button, TextButton, AltButton };
 
