@@ -5,7 +5,7 @@ import defaultTheme from '../themes/dark'
 
 
 interface State {
-    theme: DefaultTheme
+    theme: Omit<DefaultTheme, "fontFamily">
     commandLine: {
         isOpen: boolean,
         initial: string

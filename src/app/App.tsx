@@ -25,20 +25,17 @@ const App = () => {
     favoriteThemes,
   } = config;
 
-
   // Default value for the randomTheme is "on"
   const setRandomTheme = useCallback(async () => {
     if (randomTheme === "off") return;
 
     // removing themeName from array of themes
     let filteredThemes = themes.filter((t) => t.name !== themeName);
-   
+
     // remove themes with either light ot darkmode
     if (randomTheme === "light" || randomTheme === "dark") {
       filteredThemes = filteredThemes.filter((t) => t.mode === randomTheme);
-    } 
-    
-    else if (randomTheme === "favorite") {
+    } else if (randomTheme === "favorite") {
       filteredThemes = filteredThemes.filter((t) =>
         favoriteThemes.includes(t.name)
       );
@@ -51,9 +48,9 @@ const App = () => {
       dispatch(setThemeName(newTheme.name));
     }
   }, [dispatch, randomTheme, themeName, favoriteThemes]);
- 
+
   return (
-    <ThemeProvider theme={{ ...theme }}>
+    <ThemeProvider theme={{ ...theme, fontFamily }}>
       <Routes location={location} key={location.pathname}>
         <Route
           path="/"

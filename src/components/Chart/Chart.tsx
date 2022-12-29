@@ -33,10 +33,10 @@ const Chart = () => {
 
   console.log( "currentTheme" ,theme);
 
-  // const styles = {
-  //     font : { family : theme.fontFamily},
-  //     color : theme.sub
-  // }
+  const styles = {
+      font : { family : theme.fontFamily},
+      color : theme.sub
+  }
 
   const options: ChartOptions = {
     responsive: true,
@@ -53,7 +53,7 @@ const Chart = () => {
         data: raw.map((r) =>
           showDecimalPlaces === "on" ? r.toFixed(2) : Math.floor(r)
         ),
-        // borderColor: theme.sub,
+        borderColor: theme.sub,
         backgroundColor: "rgba(0, 0, 0, 0.1)",
         borderWidth: 2,
         lineTension: 0.3,
@@ -68,7 +68,7 @@ const Chart = () => {
         data: wpm.map((w) =>
           showDecimalPlaces === "on" ? w.toFixed(2) : Math.floor(w)
         ),
-        // borderColor: theme.main,
+        borderColor: theme.main,
         backgroundColor: "rgba(0, 0, 0, 0.1)",
         borderWidth: 2,
         lineTension: 0.3,
@@ -80,8 +80,8 @@ const Chart = () => {
         type: "scatter" as const,
         label: "errors",
         data: errorCount.map((e) => (e ? e : null)),
-        // borderColor: theme.colorfulError,
-        // pointBackgroundColor: theme.colorfulError,
+        borderColor: theme.colorfulError,
+        pointBackgroundColor: theme.colorfulError,
         borderWidth: 2,
         yAxisID: "error",
         order: 1,
