@@ -2,6 +2,7 @@ import { StatGroup } from "../ui";
 import Styled from "./testResults.styles";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { accuracy as acc, kogasa } from "../../utils/index";
+import Chart from "../Chart/Chart";
 
 const TestResults = () => {
   const { mode, time, words, language, showDecimalPlaces } = useAppSelector(
@@ -53,7 +54,9 @@ const TestResults = () => {
         />
       </Styled.Stats>
 
-      <Styled.Wrapper></Styled.Wrapper>
+      <Styled.Wrapper>
+        <Chart />
+      </Styled.Wrapper>
     </Styled.TestResults>
   );
 };

@@ -6,7 +6,6 @@ import { useCallback, useEffect } from "react";
 import themes from "../themes/_list";
 import { setTheme } from "../slice/app";
 import { setThemeName } from "../slice/config";
-import {kogasa} from '../utils/index'
 
 const App = () => {
   const dispatch = useAppDispatch();

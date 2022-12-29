@@ -5,7 +5,7 @@ import defaultTheme from '../themes/dark'
 
 
 interface State {
-    theme: Omit<DefaultTheme, "fontFamily">
+    theme: DefaultTheme
     commandLine: {
         isOpen: boolean,
         initial: string
@@ -43,6 +43,6 @@ const slice = createSlice({
 })
 
 
-export const  {  setCapsLock , setCommandLine , setTheme} = slice.actions
- 
+export const { setCapsLock, setCommandLine, setTheme } = slice.actions
+
 export default slice.reducer
