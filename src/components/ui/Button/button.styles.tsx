@@ -10,10 +10,20 @@ const Button = styled.button<{ $active: boolean }>`
   gap: 6px;
   font-size: 16px;
   border-radius: 8px;
-  cursor : pointer ;
+  cursor: pointer;
   background: ${(p) => (p.$active ? p.theme.main : p.theme.subAlt)};
-  color : ${(p) => (p.$active ? p.theme.bg : p.theme.text)} ;
-  transition: : background 0.2s, color 0.2s, transform  0.15s;
+  color: ${(p) => (p.$active ? p.theme.bg : p.theme.text)};
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+
+  &:hover,
+  &:focus {
+    background: ${(p) => p.theme.text};
+    color: ${(p) => p.theme.bg};
+  }
+
+  &:active {
+    transform: scale(0.925);
+  }
 `;
 
 const TextButton = styled(Button)<{ $active: boolean }>``;
