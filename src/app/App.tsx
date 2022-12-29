@@ -6,6 +6,7 @@ import { useCallback, useEffect } from "react";
 import themes from "../themes/_list";
 import { setTheme } from "../slice/app";
 import { setThemeName } from "../slice/config";
+import {a } from '../utils/index'
 
 const App = () => {
   const dispatch = useAppDispatch();
