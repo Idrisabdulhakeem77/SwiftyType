@@ -9,7 +9,7 @@ const Wrapper = styled.div``
 
 const Stats  = styled.div``
 
-const MoreStats = styled(Stats)
+const MoreStats = styled(Stats)``
 
 
 const Styled = {TestResults , Wrapper , Stats ,   MoreStats }
