@@ -24,11 +24,7 @@ const Home = ({ setRandomTheme }: HomeProps) => {
 
   const { isTyping, isFinished, isTestPopupOpen, testLanguage } =
     useAppSelector(({ type }) => type);
-    
-    console.log(testLanguage.words.length)
-
-    console.log( ` Finished ${isFinished}`)
-
+  
   return (
     <Styled.Home>
      

@@ -32,7 +32,7 @@ interface State {
 const initialState: State = {
      testLanguage: {
           name: '',
-          words: ["1" ,"2"], //Switch back to an Empty array 
+          words: ["1", "2"], //Switch back to an Empty array 
      },
      testWords: [],
      wordIndex: 0,
@@ -42,7 +42,7 @@ const initialState: State = {
      characterCount: 0,
      errorCount: 0,
      stats: {
-          raw: [],
+          raw: [1 ,3 ], //Switch back to an empty array
           wpm: [],
           characterCount: [],
           errorCount: [],
@@ -81,7 +81,7 @@ const typingTest = createSlice({
 })
 
 
-export const { setTestLanguage , setTimer , decrementTimer } = typingTest.actions
+export const { setTestLanguage, setTimer, decrementTimer } = typingTest.actions
 
 
 export default typingTest.reducer

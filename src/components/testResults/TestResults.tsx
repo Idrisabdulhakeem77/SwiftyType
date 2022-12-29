@@ -1,6 +1,7 @@
 import { StatGroup } from "../ui";
 import Styled from "./testResults.styles";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { accuracy as acc, kogasa } from "../../utils/index";
 
 const TestResults = () => {
   const { mode, time, words, language, showDecimalPlaces } = useAppSelector(
@@ -18,6 +19,14 @@ const TestResults = () => {
   } = useAppSelector(({ type }) => type);
 
   const intWpm = Math.floor(wpm);
+  const intRaw = Math.floor(raw);
+  const accuracy = acc(errorCount, characterCount);
+  const intAccuracy = Math.floor(accuracy);
+
+  const consistency = kogasa(stats.raw);
+  const intConsistency = Math.floor(consistency);
+
+  const characters = "";
 
   return (
     <Styled.TestResults>
@@ -31,7 +40,7 @@ const TestResults = () => {
             },
           ]}
         />
-        {/* <StatGroup
+        <StatGroup
           title={{ text: "acc", size: 32 }}
           values={[
             {
@@ -41,8 +50,10 @@ const TestResults = () => {
               size: 64,
             },
           ]}
-        /> */}
+        />
       </Styled.Stats>
+
+      <Styled.Wrapper></Styled.Wrapper>
     </Styled.TestResults>
   );
 };

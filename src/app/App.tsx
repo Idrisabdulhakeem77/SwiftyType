@@ -6,7 +6,7 @@ import { useCallback, useEffect } from "react";
 import themes from "../themes/_list";
 import { setTheme } from "../slice/app";
 import { setThemeName } from "../slice/config";
-import {a } from '../utils/index'
+import {kogasa} from '../utils/index'
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -52,7 +52,7 @@ const App = () => {
       dispatch(setThemeName(newTheme.name));
     }
   }, [dispatch, randomTheme, themeName, favoriteThemes]);
-
+ 
   return (
     <ThemeProvider theme={{ ...theme }}>
       <Routes location={location} key={location.pathname}>
