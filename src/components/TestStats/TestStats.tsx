@@ -5,4 +5,4 @@ const TestStats = () => {
   return <Styled.Wrapper></Styled.Wrapper>;
 };
 
-return TestStats;
+export default  TestStats;

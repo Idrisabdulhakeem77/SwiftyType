@@ -1,10 +1,11 @@
 import Styled from "./Home.styles";
 import { AnimatePresence } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import Loading from "../../components/Loading/Loading";
-import TestResults from "../../components/testResults/TestResults";
-import { Button } from "../../components/ui";
+import { Loading , TestResults } from "../../components";
+import { Button , Popup } from "../../components/ui";
 import {RiGlobeFill} from 'react-icons/ri'
+
+
 interface HomeProps {
   setRandomTheme: () => void;
 }
@@ -21,8 +22,9 @@ const Home = ({ setRandomTheme }: HomeProps) => {
     transitionSpeed,
     keymap,
     keyTips,
+
   
-  } = useAppSelector(({ config }) => config);
+  } = useAppSelector(state => state.config);
 
   const { isTyping, isFinished, isTestPopupOpen, testLanguage } =
     useAppSelector(({ type }) => type);
@@ -53,7 +55,9 @@ const Home = ({ setRandomTheme }: HomeProps) => {
       </AnimatePresence>
        <AnimatePresence>
           { isTestPopupOpen && (
-               
+                <Popup >
+                   
+                  </Popup>
           )}
        </AnimatePresence>
     </Styled.Home>
