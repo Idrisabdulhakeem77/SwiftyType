@@ -37,7 +37,8 @@ const Home = ({ setRandomTheme }: HomeProps) => {
     <Styled.Home>
       <AnimatePresence exitBeforeEnter>
         {!testLanguage.words.length ? (
-          <Loading />
+          // <Loading />
+          <div> Loading i guess </div>
         ) : isFinished ? (
           <Styled.Wrapper key="results">{/* <TestResults/> */}</Styled.Wrapper>
         ) : (

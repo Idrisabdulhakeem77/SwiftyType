@@ -17,7 +17,7 @@ interface State {
 const initialState: State = {
     theme: defaultTheme,
     commandLine: {
-        isOpen: false,
+        isOpen: true,
         initial: ""
     },
     capsLock: false

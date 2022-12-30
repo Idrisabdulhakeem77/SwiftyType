@@ -13,6 +13,7 @@ import {
   MotionConfig,
 } from "framer-motion";
 import Styled, { GlobalStyle } from "./App.styled";
+import {CommandLine } from '../components'
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -64,15 +65,15 @@ const App = () => {
           <Styled.App>
             <Styled.Content>
            <AnimatePresence>
-              {/* { commandLine.isOpen && } */}
+              { commandLine.isOpen && <CommandLine/> }
            </AnimatePresence>
 
               <AnimatePresence exitBeforeEnter>
                 <Routes location={location} key={location.pathname}>
-                  <Route
+                  {/* <Route
                     path="/"
                     element={<Home setRandomTheme={setRandomTheme} />}
-                  />
+                  /> */}
                 </Routes>
               </AnimatePresence>
             </Styled.Content>
