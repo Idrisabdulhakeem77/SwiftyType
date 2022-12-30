@@ -3,7 +3,8 @@ import { AnimatePresence } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Loading from "../../components/Loading/Loading";
 import TestResults from "../../components/testResults/TestResults";
-
+import { Button } from "../../components/ui";
+import {RiGlobeFill} from 'react-icons/ri'
 interface HomeProps {
   setRandomTheme: () => void;
 }
@@ -20,6 +21,7 @@ const Home = ({ setRandomTheme }: HomeProps) => {
     transitionSpeed,
     keymap,
     keyTips,
+  
   } = useAppSelector(({ config }) => config);
 
   const { isTyping, isFinished, isTestPopupOpen, testLanguage } =
@@ -34,14 +36,26 @@ const Home = ({ setRandomTheme }: HomeProps) => {
         ) : isFinished ? (
           <Styled.Wrapper key="results">
            
-             <TestResults/>
+             {/* <TestResults/> */}
           </Styled.Wrapper>
         ) : (
-          <Styled.Wrapper>
-            Its Reaching here
+          <Styled.Wrapper> 
+             {/* {Added Test Id here } */}
+             <AnimatePresence>
+                <Styled.TestButtons>
+                   <Button>
+                      <RiGlobeFill/> {  testLanguage.name}
+                   </Button>
+                </Styled.TestButtons>
+             </AnimatePresence>
           </Styled.Wrapper>
         )}
       </AnimatePresence>
+       <AnimatePresence>
+          { isTestPopupOpen && (
+               
+          )}
+       </AnimatePresence>
     </Styled.Home>
   
   );

@@ -32,7 +32,7 @@ interface State {
 const initialState: State = {
      testLanguage: {
           name: '',
-          words: ["1", "2"], //Switch back to an Empty array 
+          words: [],  
      },
      testWords: [],
      wordIndex: 0,
@@ -42,7 +42,7 @@ const initialState: State = {
      characterCount: 0,
      errorCount: 0,
      stats: {
-          raw: [1 ,3 ], //Switch back to an empty array
+          raw: [ ], 
           wpm: [],
           characterCount: [],
           errorCount: [],
@@ -53,7 +53,7 @@ const initialState: State = {
      isReady: false,
      isRunning: false,
      isTyping: false,
-     isFinished: true, // Switch back to false
+     isFinished: false, 
      isTestPopupOpen: false,
 }
 

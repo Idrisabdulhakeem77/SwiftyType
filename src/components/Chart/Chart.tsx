@@ -31,16 +31,50 @@ const Chart = () => {
     labels[stats.raw.length] = elapsedTime;
   }
 
-  console.log( "currentTheme" ,theme);
+  console.log("currentTheme", theme);
 
   const styles = {
-      font : { family : theme.fontFamily},
-      color : theme.sub
-  }
+    font: { family: theme.fontFamily },
+    color: theme.sub,
+  };
+
+  const ticks = {
+    precision: 0,
+    autoSkip: true,
+    autoSkipPadding: 20,
+    ...styles,
+  };
 
   const options: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    
+    interaction: {
+      intersect: false,
+      mode: "index",
+    },
+
+    animations: {
+      color: { duration: 0.3 },
+    },
+
+    scales: {},
+
+    plugins: {
+      tooltip: {
+        callbacks: {
+          labelColor: (tooltipItem: TooltipItem<"line">) => {
+            const { borderColor } = tooltipItem.dataset;
+
+            return {
+              backgroundColor: borderColor,
+              borderColor,
+              borderRadius: 6,
+            } as TooltipLabelStyle;
+          },
+        },
+      },
+    },
   };
 
   const data = {

@@ -21,10 +21,17 @@ const Wrapper = styled(m.div).attrs((props) => ({
 }))`
   position: relative;
   display: flex;
-  gap: 18px;
   flex-direction: column;
+  gap: 18px;
 `;
 
-const Styled = { Home, Wrapper };
+
+const TestButtons = styled(m.div).attrs(() => ( {
+    initial  : {   opacity : 1  } , // Swap initial and exit back to zero when done
+    exit : { opacity : 1}  , 
+    animate : { opacity : 1 }
+} ))``
+
+const Styled = { Home, Wrapper , TestButtons };
 
 export default Styled;
