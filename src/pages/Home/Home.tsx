@@ -3,8 +3,9 @@ import { AnimatePresence } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Loading, TestResults } from "../../components";
 import { Button, Popup, Input, Key } from "../../components/ui";
-import { RiGlobeFill } from "react-icons/ri";
-import { setIsTestPopupOpen } from "../../slice/typingTest";
+import { RiGlobeFill  , RiTerminalLine  } from "react-icons/ri";
+import { setIsTestPopupOpen  } from "../../slice/typingTest";
+import {setCommandLine} from '../../slice/app'
 import { useState } from "react";
 
 interface HomeProps {
@@ -79,6 +80,42 @@ const Home = ({ setRandomTheme }: HomeProps) => {
               </form>
             </Styled.CustomConfig>
           </Popup>
+        )}
+        {!isTyping && (
+          <Styled.Buttom>
+            {keyTips === "show" && (
+              <Styled.Tips>
+                {(mode === "zen" ||
+                  (mode === "words" && !words) ||
+                  (mode === "time" && !time)) && (
+                  <div>
+                    <Key>shift</Key> + <Key>enter</Key> - stop test
+                  </div>
+                )}
+                <div>
+                  <Key>{quickRestart !== "esc" ? "tab" : "esc"}</Key>
+                  {quickRestart === "off" ? (
+                    <>
+                      {" "}
+                      + <Key>enter</Key>
+                    </>
+                  ) : null}{" "}
+                  - restart test
+                </div>
+                <div>
+                  <Key>{quickRestart !== "esc" ? "esc" : "tab"}</Key> - command
+                  line
+                </div>
+              </Styled.Tips>
+            )}
+            <Styled.CommandLineButton
+              title="Command line"
+              active
+              onClick={() => dispatch(setCommandLine({ isOpen: true }))}
+            >
+              <RiTerminalLine />
+            </Styled.CommandLineButton>
+          </Styled.Buttom>
         )}
       </AnimatePresence>
     </Styled.Home>

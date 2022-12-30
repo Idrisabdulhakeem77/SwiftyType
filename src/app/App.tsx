@@ -6,6 +6,13 @@ import { useCallback, useEffect } from "react";
 import themes from "../themes/_list";
 import { setTheme } from "../slice/app";
 import { setThemeName } from "../slice/config";
+import {
+  AnimatePresence,
+  domAnimation,
+  LazyMotion,
+  MotionConfig,
+} from "framer-motion";
+import Styled, { GlobalStyle } from "./App.styled";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -51,12 +58,27 @@ const App = () => {
 
   return (
     <ThemeProvider theme={{ ...theme, fontFamily }}>
-      <Routes location={location} key={location.pathname}>
-        <Route
-          path="/"
-          element={<Home setRandomTheme={setRandomTheme} />}
-        ></Route>
-      </Routes>
+      <LazyMotion features={domAnimation}>
+        <MotionConfig transition={{ opacity: { duration: transitionSpeed } }}>
+          <GlobalStyle />
+          <Styled.App>
+            <Styled.Content>
+           <AnimatePresence>
+              {/* { commandLine.isOpen && } */}
+           </AnimatePresence>
+
+              <AnimatePresence exitBeforeEnter>
+                <Routes location={location} key={location.pathname}>
+                  <Route
+                    path="/"
+                    element={<Home setRandomTheme={setRandomTheme} />}
+                  />
+                </Routes>
+              </AnimatePresence>
+            </Styled.Content>
+          </Styled.App>
+        </MotionConfig>
+      </LazyMotion>
     </ThemeProvider>
   );
 };

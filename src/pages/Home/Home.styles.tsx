@@ -1,5 +1,6 @@
 import { m } from "framer-motion";
 import styled from "styled-components";
+import { Button } from "../../components/ui";
 
 const Home = styled(m.div).attrs({
   initial: { opacity: 1 },
@@ -33,6 +34,27 @@ const TestButtons = styled(m.div).attrs(() => ({
 
 const CustomConfig = styled.div``;
 
-const Styled = { Home, Wrapper, TestButtons, CustomConfig };
+const CommandLineButton = styled(Button)``;
+
+const Tips = styled.div``;
+
+const Buttom = styled(m.div).attrs(() => ({
+  initial: { opacity: 0 },
+  exit: { opacity: 0 },
+  animate: { opacity: 0 },
+}))``;
+
+const Buttons = styled.div``;
+
+const Styled = {
+  Home,
+  Wrapper,
+  TestButtons,
+  CustomConfig,
+  CommandLineButton,
+  Tips,
+  Buttom,
+  Buttons,
+};
 
 export default Styled;

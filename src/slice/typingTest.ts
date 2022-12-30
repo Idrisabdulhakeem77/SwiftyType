@@ -79,12 +79,14 @@ const typingTest = createSlice({
           },
           setIsTestPopupOpen: (state, action: PayloadAction<boolean>) => {
                state.isTestPopupOpen = action.payload
-          }
+          } ,
+
+         
      }
 })
 
 
-export const { setTestLanguage, setTimer, decrementTimer, setIsTestPopupOpen } = typingTest.actions
+export const { setTestLanguage, setTimer, decrementTimer, setIsTestPopupOpen ,  } = typingTest.actions
 
 
 export default typingTest.reducer
