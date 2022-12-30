@@ -32,7 +32,7 @@ interface State {
 const initialState: State = {
      testLanguage: {
           name: '',
-          words: [],  
+          words: [],
      },
      testWords: [],
      wordIndex: 0,
@@ -42,7 +42,7 @@ const initialState: State = {
      characterCount: 0,
      errorCount: 0,
      stats: {
-          raw: [ ], 
+          raw: [],
           wpm: [],
           characterCount: [],
           errorCount: [],
@@ -53,7 +53,7 @@ const initialState: State = {
      isReady: false,
      isRunning: false,
      isTyping: false,
-     isFinished: false, 
+     isFinished: false,
      isTestPopupOpen: false,
 }
 
@@ -76,12 +76,15 @@ const typingTest = createSlice({
 
           decrementTimer: (state) => {
                state.timer--;
+          },
+          setIsTestPopupOpen: (state, action: PayloadAction<boolean>) => {
+               state.isTestPopupOpen = action.payload
           }
      }
 })
 
 
-export const { setTestLanguage, setTimer, decrementTimer } = typingTest.actions
+export const { setTestLanguage, setTimer, decrementTimer, setIsTestPopupOpen } = typingTest.actions
 
 
 export default typingTest.reducer

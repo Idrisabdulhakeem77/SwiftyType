@@ -25,13 +25,14 @@ const Wrapper = styled(m.div).attrs((props) => ({
   gap: 18px;
 `;
 
+const TestButtons = styled(m.div).attrs(() => ({
+  initial: { opacity: 1 }, // Swap initial and exit back to zero when done
+  exit: { opacity: 1 },
+  animate: { opacity: 1 },
+}))``;
 
-const TestButtons = styled(m.div).attrs(() => ( {
-    initial  : {   opacity : 1  } , // Swap initial and exit back to zero when done
-    exit : { opacity : 1}  , 
-    animate : { opacity : 1 }
-} ))``
+const CustomConfig = styled.div``;
 
-const Styled = { Home, Wrapper , TestButtons };
+const Styled = { Home, Wrapper, TestButtons, CustomConfig };
 
 export default Styled;
