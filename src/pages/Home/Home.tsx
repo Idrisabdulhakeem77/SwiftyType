@@ -2,9 +2,10 @@ import Styled from "./Home.styles";
 import { AnimatePresence } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Loading, TestResults } from "../../components";
-import { Button, Popup } from "../../components/ui";
+import { Button, Popup, Input, Key } from "../../components/ui";
 import { RiGlobeFill } from "react-icons/ri";
 import { setIsTestPopupOpen } from "../../slice/typingTest";
+import { useState } from "react";
 
 interface HomeProps {
   setRandomTheme: () => void;
@@ -12,6 +13,8 @@ interface HomeProps {
 
 const Home = ({ setRandomTheme }: HomeProps) => {
   const { commandLine } = useAppSelector(({ app }) => app);
+
+  const [customAmount, setCustomAmount] = useState(0);
 
   const {
     mode,
@@ -57,9 +60,23 @@ const Home = ({ setRandomTheme }: HomeProps) => {
               {/* A condition to check if the mode is time is supposed to here */}
 
               <form>
-                 
+                <Input
+                  type="number"
+                  min="0"
+                  max={mode === "time" ? "3600" : "5000"}
+                  value={customAmount}
+                  // this is the same as e.target.value just destructed from e directly
+                  onChange={({ target: { value } }) =>
+                    setCustomAmount(+customAmount)
+                  }
+                  autoFocus
+                />
+                <div>
+                  You can start an infinite test by inputting 0. To stop the
+                  test, use <Key>shift</Key> + <Key>enter</Key>
+                </div>
+                <Button type="submit"> ok </Button>
               </form>
-
             </Styled.CustomConfig>
           </Popup>
         )}
