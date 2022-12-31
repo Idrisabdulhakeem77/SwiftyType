@@ -30,14 +30,20 @@ const slice = createSlice({
     initialState,
     reducers: {
         setTheme: (state, action: PayloadAction<DefaultTheme>) => {
-
+            state.theme = action.payload
         },
 
         setCommandLine: (state, action: PayloadAction<{ isOpen: boolean, initial?: string }>) => {
-
+            const { isOpen, initial } = action.payload
+            state.commandLine = {
+                initial: initial || "",
+                isOpen,
+            }
         },
 
-        setCapsLock: (state, action: PayloadAction<boolean>) => { }
+        setCapsLock: (state, action: PayloadAction<boolean>) => {
+            state.capsLock = action.payload
+        }
 
     }
 })
