@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 const Button = styled.button<{ $active?: boolean }>`
-  padding: 8px;
+   padding: 8px;
   display: flex;
-  align-items: center;
+ align-items: center;
   justify-content: center;
   font-family: inherit;
   user-select: none;
@@ -23,7 +23,7 @@ const Button = styled.button<{ $active?: boolean }>`
 
   &:active {
     transform: scale(0.925);
-  }
+  } 
 `;
 
 const TextButton = styled(Button)<{ $active?: boolean }>`
