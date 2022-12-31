@@ -18,7 +18,7 @@ const initialState: State = {
     theme: defaultTheme,
     commandLine: {
         isOpen: true,
-        initial: "mode" // Turn initial to be an emply string
+        initial: ""
     },
     capsLock: false
 
