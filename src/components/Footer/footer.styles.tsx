@@ -1,20 +1,31 @@
-import { m} from 'framer-motion'
+import { m } from "framer-motion";
 
-import styled from 'styled-components'
+import styled from "styled-components";
 
+const Footer = styled.footer`
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+`;
 
-const Footer = styled.footer``
+const Buttons = styled(m.div).attrs(() => ({
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+}))`
+  display: flex;
+  gap: 20px;
 
+  button,
+  a {
+    padding-inline: 0;
+    font-size: 16px;
+  }
+`;
 
-const Buttons = styled(m.div).attrs(() => ( {
-    initial : { opacity : 0 } ,
-    animate : { opacity : 1} ,
-    exit : { opacity :  0 }
-     
-} ))``
+const Styled = { Footer, Buttons };
 
-
-
-const Styled = { Footer , Buttons}
-
-export default Styled
+export default Styled;

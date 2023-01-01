@@ -14,6 +14,7 @@ import {
 } from "framer-motion";
 import Styled, { GlobalStyle } from "./App.styled";
 import {CommandLine } from '../components'
+import {Footer} from "../components";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -76,6 +77,9 @@ const App = () => {
                   /> */}
                 </Routes>
               </AnimatePresence>
+ 
+        <Footer/>
+
             </Styled.Content>
           </Styled.App>
         </MotionConfig>
