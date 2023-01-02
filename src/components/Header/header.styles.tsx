@@ -4,8 +4,10 @@ import { m } from "framer-motion";
 const Header = styled.header`
   width: 100%;
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 12px;
+  align-items: center;
+  display : flex ;
+  align-items: center;
+  gap: 16px;
   user-select: none;
 `;
 
@@ -20,12 +22,15 @@ const Logo = styled.div`
 const Text = styled(m.div).attrs(() => ({
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.75 } },
-}))<{ $typing: boolean }>`
+  exit : { opacity : 1  , transition: { delay: 0.5, duration: 0.5 } }
+}))<{ $typing: boolean , $isMobile : boolean }>`
+  display: ${(props) =>  props.$isMobile ? "none" : ""} ;
   margin-bottom: 12px;
   position: relative;
   font-size: 32px;
   color: ${(p) => (p.$typing ? p.theme.sub : p.theme.text)};
   transition-property: color;
+  
 `;
 
 const TopText = styled(m.div).attrs(() => ({
@@ -52,6 +57,21 @@ const TopText = styled(m.div).attrs(() => ({
   transition-property: color;
 `;
 
-const Styled = { Header, Logo, Text, TopText };
+
+const Menu = styled(m.div).attrs(() => ( {
+     initial : { opacity : 0 } ,
+     animate: { opacity: 1, transition: { delay: 0.25, duration: 0.5 } },
+     exit : { opacity : 0}
+}))`
+     width : 10rem ;
+    display : flex;
+    justify-content: space-between;
+    align-items: center;
+    gap : 8px ;
+
+`
+
+
+const Styled = { Header, Logo, Text, TopText  , Menu };
 
 export default Styled;
