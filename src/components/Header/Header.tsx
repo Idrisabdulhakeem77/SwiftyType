@@ -5,11 +5,14 @@ import {
   RiKeyboardBoxFill,
   RiLoginCircleFill,
   RiNotificationFill,
+  RiInformationFill,
+  RiVipCrownFill,
   RiSettingsFill,
 } from "react-icons/ri";
 import { Button, LogoIcon } from "../ui";
 import { AnimatePresence, m } from "framer-motion";
 import { useCurrentViewPort } from "../../hooks/useCurrentViewPort";
+import {FaUser} from 'react-icons/fa'
 
 const Header = () => {
   const { isTyping } = useAppSelector(({ type }) => type);
@@ -18,44 +21,61 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const menuButtons = [
-    { title: "Home", to: "/", icon: <RiKeyboardBoxFill /> },
-    { title: "Settings", to: "/setting", icon: <RiSettingsFill /> },
-    { title: "Login", to: "/login", icon: <RiLoginCircleFill /> },
-    { title: "Notfication", to: "/notification", icon: <RiNotificationFill /> },
+  const leftMenuButton = [
+    { title: "Home", icon: <RiKeyboardBoxFill />, to: "/" },
+    { title: "Leaderboards", icon: <RiVipCrownFill />, to: "/leaderboards" },
+    { title: "About", icon: <RiInformationFill />, to: "/about" },
+    { title: "Settings", icon: <RiSettingsFill />, to: "/settings" },
+  ];
+
+  const rightMenuButton = [
+    { title: "Login", icon: <FaUser />, to: "/login" },
+    {
+      title: "Notification",
+      icon: <RiNotificationFill />,
+      to: "/notification",
+    },
   ];
 
   const { isMobile } = useCurrentViewPort();
 
   return (
     <Styled.Header>
-      <Styled.Logo>
-        <LogoIcon />
-      </Styled.Logo>
-      <Styled.Text $typing={isTyping} $isMobile={isMobile}>
-        <AnimatePresence>
-          {!isTyping && <Styled.TopText> swift see</Styled.TopText>}
-        </AnimatePresence>
-        swift type
-      </Styled.Text>
-      {!isTyping && (
-        <>
-          <Styled.Menu>
-          {menuButtons.map(({ title, icon, to }) => (
-              <Button
-                key={title}
-                text
-                title={title}
-                onClick={() => navigate(to)}
-              >
-                {icon}
-              </Button>
-            ))}
+      <Styled.LeftSideHeaderContent>
+        <Styled.Logo>
+          <LogoIcon />
+        </Styled.Logo>
+        <Styled.Text $typing={isTyping} $isMobile={isMobile}>
+          <AnimatePresence>
+            {!isTyping && <Styled.TopText> swift see</Styled.TopText>}
+          </AnimatePresence>
+          swift type
+        </Styled.Text>
+        {!isTyping && (
+          <>
+            <Styled.Menu>
+              {leftMenuButton.map(({ title, icon, to }) => (
+                <Button
+                  key={title}
+                  text
+                  title={title}
+                  onClick={() => navigate(to)}
+                >
+                  {icon}
+                </Button>
+              ))}
+            </Styled.Menu>
+          </>
+        )}
+      </Styled.LeftSideHeaderContent>
 
-
-          </Styled.Menu>
-        </>
-      )}
+      <Styled.RightSideHeaderContetnt>
+        {rightMenuButton.map(({ title, icon, to }) => (
+          <Button key={title} text title={title} onClick={() => navigate(to)}>
+            {icon}
+          </Button>
+        ))}
+      </Styled.RightSideHeaderContetnt>
     </Styled.Header>
   );
 };
