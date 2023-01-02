@@ -4,6 +4,7 @@ import { useAppSelector } from "../../app/hooks";
 import { RiKeyboardBoxFill } from "react-icons/ri";
 import { LogoIcon } from "../ui";
 import { AnimatePresence } from "framer-motion";
+import { useCurrentViewPort } from "../../hooks/useCurrentViewPort";
 
 const Header = () => {
   const { isTyping } = useAppSelector(({ type }) => type);
@@ -17,6 +18,9 @@ const Header = () => {
     { title: "Settings", to: "/setting", icon: <RiKeyboardBoxFill /> },
   ];
 
+ 
+  const { isMobile } =  useCurrentViewPort() 
+ 
   return (
     <Styled.Header>
       <Styled.Logo>

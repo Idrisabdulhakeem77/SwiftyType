@@ -38,7 +38,7 @@ const LogoIcon = () => {
     animate: 'visible',
   };
 
-  // Find out ehat props and varients do it an animation
+  // Find out what props and varients do it an animation
 
   return <div>Logo icon</div>;
 };

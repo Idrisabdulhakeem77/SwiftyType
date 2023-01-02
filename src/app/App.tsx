@@ -23,6 +23,8 @@ const App = () => {
   const location = useLocation();
 
   const { theme, commandLine } = useAppSelector(({ app }) => app);
+
+  
   const config = useAppSelector(({ config }) => config);
 
   const {
