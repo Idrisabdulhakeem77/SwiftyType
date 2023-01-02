@@ -6,6 +6,8 @@ import { useCallback, useEffect } from "react";
 import themes from "../themes/_list";
 import { setTheme } from "../slice/app";
 import { setThemeName } from "../slice/config";
+
+
 import {
   AnimatePresence,
   domAnimation,
@@ -14,7 +16,7 @@ import {
 } from "framer-motion";
 import Styled, { GlobalStyle } from "./App.styled";
 import {CommandLine } from '../components'
-import {Footer} from "../components";
+import {Footer , Header} from "../components";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -64,7 +66,10 @@ const App = () => {
         <MotionConfig transition={{ opacity: { duration: transitionSpeed } }}>
           <GlobalStyle />
           <Styled.App>
-            <Styled.Content>
+            <Styled.Content> 
+   
+                 <Header/>
+               
            <AnimatePresence>
               { commandLine.isOpen && <CommandLine/> }
            </AnimatePresence>
