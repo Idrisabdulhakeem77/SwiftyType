@@ -31,8 +31,8 @@ interface State {
 
 const initialState: State = {
      testLanguage: {
-          name: '',
-          words: [],
+          name: 'english', // swap back to empty string
+          words: [ "idris" , "abdulhakeem"] , // swap back to empty array
      },
      testWords: [],
      wordIndex: 0,

@@ -78,10 +78,10 @@ const App = () => {
 
               <AnimatePresence exitBeforeEnter>
                 <Routes location={location} key={location.pathname}>
-                  {/* <Route
+                  <Route
                     path="/"
                     element={<Home setRandomTheme={setRandomTheme} />}
-                  /> */}
+                  />
                 </Routes>
               </AnimatePresence>
  

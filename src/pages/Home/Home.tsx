@@ -1,11 +1,11 @@
 import Styled from "./Home.styles";
 import { AnimatePresence } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { Loading, TestResults } from "../../components";
+import { Loading, TestResults  , TestStats  ,TypingTest } from "../../components";
 import { Button, Popup, Input, Key } from "../../components/ui";
-import { RiGlobeFill  , RiTerminalLine  } from "react-icons/ri";
-import { setIsTestPopupOpen  } from "../../slice/typingTest";
-import {setCommandLine} from '../../slice/app'
+import { RiGlobeFill, RiTerminalLine } from "react-icons/ri";
+import { setIsTestPopupOpen } from "../../slice/typingTest";
+import { setCommandLine } from "../../slice/app";
 import { useState } from "react";
 
 interface HomeProps {
@@ -37,29 +37,31 @@ const Home = ({ setRandomTheme }: HomeProps) => {
     <Styled.Home>
       <AnimatePresence exitBeforeEnter>
         {!testLanguage.words.length ? (
-          // <Loading />
-          <div> Loading i guess </div>
+          <Loading />
         ) : isFinished ? (
           <Styled.Wrapper key="results">{/* <TestResults/> */}</Styled.Wrapper>
         ) : (
           <Styled.Wrapper>
             {/* {Added Test Id here } */}
             <AnimatePresence>
-              <Styled.TestButtons>
-                <Button>
-                  <RiGlobeFill /> {testLanguage.name}
-                </Button>
-              </Styled.TestButtons>
+              {!isTyping && (
+                <Styled.TestButtons>
+                  <Button text onClick={() => dispatch(setCommandLine({ isOpen : true , initial : "language" }))}>
+                    <RiGlobeFill /> {testLanguage.name}
+                  </Button>
+                </Styled.TestButtons>
+              )}
             </AnimatePresence>
+            <TestStats/>
           </Styled.Wrapper>
         )}
       </AnimatePresence>
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isTestPopupOpen && (
           <Popup close={() => dispatch(setIsTestPopupOpen(false))}>
             <Styled.CustomConfig>
               <h4>{mode === "time" ? "Test duration" : "Word amount"}</h4>
-              {/* A condition to check if the mode is time is supposed to here */}
+              A condition to check if the mode is time is supposed to here
 
               <form>
                 <Input
@@ -118,7 +120,7 @@ const Home = ({ setRandomTheme }: HomeProps) => {
             </Styled.CommandLineButton>
           </Styled.Buttom>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </Styled.Home>
   );
 };
