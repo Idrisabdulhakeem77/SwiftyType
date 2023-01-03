@@ -59,6 +59,8 @@ const TypingTest = () => {
      if(!isRunning) {
          dispatch(startTest(performance.now()))
      }
+     dispatch(checkInput({value , config}))
+     
 
   };
 
