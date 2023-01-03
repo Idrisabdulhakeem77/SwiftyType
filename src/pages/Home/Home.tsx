@@ -53,6 +53,7 @@ const Home = ({ setRandomTheme }: HomeProps) => {
               )}
             </AnimatePresence>
             <TestStats/>
+            <TypingTest/>
           </Styled.Wrapper>
         )}
       </AnimatePresence>
