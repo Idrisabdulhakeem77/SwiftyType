@@ -51,20 +51,6 @@ const TypingTest = () => {
 
   const dispatch = useAppDispatch()
 
-  const inputHandler = ( e : React.ChangeEvent<HTMLInputElement>) => {
-     if(!isReady) return 
-
-     const {value} = e.target
-
-     if(!isRunning) {
-         dispatch(startTest(performance.now()))
-     }
-     dispatch(checkInput({value , config}))
-     
-
-  };
-
-  // const blurWords = () => {}
 
   const [isFocused, setIsFocused] = useState(false);
   const [isBlurred, setIsBlurred] = useState(true);
@@ -89,9 +75,33 @@ const TypingTest = () => {
   const typingTimeOut = useRef<NodeJS.Timer>();
   const highestWordIndex = useRef(0);
 
+  const inputHandler = ( e : React.ChangeEvent<HTMLInputElement>) => {
+     if(!isReady) return 
+
+     const {value} = e.target
+     
+
+      
+     if(!isRunning) {
+         dispatch(startTest(performance.now()))
+     }
+
+      /// Checks if the value is the same as the correct 
+     dispatch(checkInput({value , config}))
+     dispatch(setIsTyping(true))
+    
+      clearTimeout(typingTimeOut.current)
+    
+
+      typingTimeOut.current = setTimeout(() =>  { setIsTyping(false)} , 1000)
+  };
+
+  // const blurWords = () => {}
+
+
   return (
     <Styled.TypingTest $fontSize={fontSize}>
-      <Styled.Input ref={input} value={inputValue} onChange={inputHandler} />
+      <Styled.Input ref={input} value={inputValue} onChange={inputHandler} onBlur=  />
     </Styled.TypingTest>
   );
 };

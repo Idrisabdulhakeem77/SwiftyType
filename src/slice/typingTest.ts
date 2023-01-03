@@ -36,7 +36,7 @@ const initialState: State = {
      },
      testWords: [],
      wordIndex: 0,
-     inputValue: ' ',
+     inputValue: '',
      raw: 0,
      wpm: 0,
      characterCount: 0,
