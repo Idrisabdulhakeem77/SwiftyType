@@ -27,6 +27,6 @@ const Input =  styled.input`
 
 const Wrapper = styled.div<{ $blurred : boolean}>``
 
-const Styled = { TypingTest , Input };
+const Styled = { TypingTest , Input ,Wrapper };
 
 export default Styled;

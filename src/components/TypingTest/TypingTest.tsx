@@ -96,12 +96,21 @@ const TypingTest = () => {
       typingTimeOut.current = setTimeout(() =>  { setIsTyping(false)} , 1000)
   };
 
-  // const blurWords = () => {}
+  const blurWords = ( e : React.FocusEvent<HTMLInputElement>) => {
+     e.preventDefault()
+     clearTimeout(blurTimeOut.current)
+
+     blurTimeOut.current = setTimeout(() => { setIsBlurred(true) } , 1000)
+
+     setIsFocused(true)
+
+
+  }
 
 
   return (
     <Styled.TypingTest $fontSize={fontSize}>
-      <Styled.Input ref={input} value={inputValue} onChange={inputHandler} onBlur=  />
+      <Styled.Input ref={input} value={inputValue} onChange={inputHandler} onBlur={blurWords}  />
     </Styled.TypingTest>
   );
 };
