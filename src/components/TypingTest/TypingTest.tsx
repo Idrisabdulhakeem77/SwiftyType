@@ -15,7 +15,7 @@ import {
   resetTest,
 } from "../../slice/typingTest";
 import React, { useRef, useState } from "react";
-import { useIsPresent } from "framer-motion";
+import { AnimatePresence, useIsPresent } from "framer-motion";
 
 const TypingTest = () => {
   const config = useAppSelector(({ config }) => config);
@@ -108,9 +108,35 @@ const TypingTest = () => {
   }
 
 
+  const focusWords = () => {
+
+  }
+
+
   return (
     <Styled.TypingTest $fontSize={fontSize}>
       <Styled.Input ref={input} value={inputValue} onChange={inputHandler} onBlur={blurWords}  />
+      <AnimatePresence>
+          { isReady && (
+             <Styled.Wrapper
+              onClick={focusWords}
+             $blurred={outOfFocusWarning === "show" && isBlurred}
+             >
+               { isFocused && caretStyle !== "off" && (
+                  <Styled.Caret
+                  animate={{opacity: [1, isTyping ? 1 : 0, 1],}}
+                  
+                  
+                   $style={caretStyle}
+                  >
+
+                  </Styled.Caret>
+               )}
+
+
+             </Styled.Wrapper>
+          )}
+      </AnimatePresence>
     </Styled.TypingTest>
   );
 };
