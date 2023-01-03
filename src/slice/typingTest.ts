@@ -32,7 +32,7 @@ interface State {
 const initialState: State = {
      testLanguage: {
           name: 'english', // swap back to empty string
-          words: [ "idris" , "abdulhakeem"] , // swap back to empty array
+          words: ["idris", "abdulhakeem"], // swap back to empty array
      },
      testWords: [],
      wordIndex: 0,
@@ -79,14 +79,32 @@ const typingTest = createSlice({
           },
           setIsTestPopupOpen: (state, action: PayloadAction<boolean>) => {
                state.isTestPopupOpen = action.payload
-          } ,
+          },
+          addTestWords: () => {
 
-         
+          },
+          setIsReady: () => { },
+          checkInput: () => { },
+          setIsTyping: () => { },
+
+
+
+          startTest: (state, action: PayloadAction<number>) => {
+               const timestamp = action.payload
+               state.startTime = +timestamp.toFixed(2)
+               state.isRunning = true
+
+          },
+
+
+          resetTest: () => { }
+
+
      }
 })
 
 
-export const { setTestLanguage, setTimer, decrementTimer, setIsTestPopupOpen ,  } = typingTest.actions
+export const { setTestLanguage, setTimer, decrementTimer, setIsTestPopupOpen, addTestWords, checkInput, setIsReady, setIsTyping, startTest, resetTest } = typingTest.actions
 
 
 export default typingTest.reducer
