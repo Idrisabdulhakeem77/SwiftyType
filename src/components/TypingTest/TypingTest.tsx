@@ -18,6 +18,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, useIsPresent } from "framer-motion";
 
 const TypingTest = () => {
+  const { commandLine, capsLock } = useAppSelector(({ app }) => app);
   const config = useAppSelector(({ config }) => config);
   const {
     mode,
@@ -106,26 +107,24 @@ const TypingTest = () => {
   };
 
   const focusWords = () => {
-    clearTimeout(blurTimeOut.current)
-    input.current?.focus()
-    setIsFocused(true)
-    setIsBlurred(false)
+    clearTimeout(blurTimeOut.current);
+    input.current?.focus();
+    setIsFocused(true);
+    setIsBlurred(false);
   };
- 
 
-  const handleKeyDown = ( e : KeyboardEvent) => {
-     if(['Tab', 'Escape', 'Enter'].includes(e.key) || e.key.match(/F\d*/)) return 
-     e.preventDefault()
-     focusWords()
-  }
-
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (["Tab", "Escape", "Enter"].includes(e.key) || e.key.match(/F\d*/))
+      return;
+    e.preventDefault();
+    focusWords();
+  };
 
   const handleClick = () => {
-      const randomIndex = Math.floor(Math.random() * Object.keys(sprite).length)
+    const randomIndex = Math.floor(Math.random() * Object.keys(sprite).length);
 
-      playClickSound({id : randomIndex.toString()})
-  }
-
+    playClickSound({ id: randomIndex.toString() });
+  };
 
   const generateWords = (words: number) => {
     const newWords = [];
@@ -139,15 +138,39 @@ const TypingTest = () => {
     }
 
     dispatch(addTestWords(newWords));
-  }; 
- 
+  };
 
   useEffect(() => {
-     if(!isPresent) {
-         dispatch(setIsReady(false))
-     }
-  } , [dispatch , isPresent])
+    dispatch(resetTest());
+    dispatch(setIsReady(true));
 
+    if (mode === "words" && words > 0) {
+      generateWords(Math.min(100, words));
+    } else if (mode === "time" || (mode === "words" && !words)) {
+      generateWords(100);
+    } else if (mode === "zen") {
+      dispatch(setIsReady(true));
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!isPresent) {
+      dispatch(setIsReady(false));
+    }
+  }, [dispatch, isPresent]);
+
+  useEffect(() => {
+    if (!commandLine.isOpen && !isTestPopupOpen) {
+      focusWords();
+    }
+  }, [isTestPopupOpen, commandLine.isOpen]);
+
+  useEffect(() => {
+    clickSound?.volume(soundVolume);
+    clickError?.volume(soundVolume);
+  }, [soundVolume, clickError, clickSound]);
 
   return (
     <Styled.TypingTest $fontSize={fontSize}>
@@ -230,6 +253,29 @@ const TypingTest = () => {
           </Styled.Wrapper>
         )}
       </AnimatePresence>
+
+      {capsLockWarning === "show" && isReady && capsLock && (
+        <Styled.CapLock
+          onClick={() =>
+            dispatch(
+              setCommandLine({ isOpen: true, initial: "capsLockWarning" })
+            )
+          }
+        >
+          <RiLockFill />
+          Caps Lock
+        </Styled.CapLock>
+      )} 
+
+       
+       {/* When the Windows is blurred */}
+
+      {outOfFocusWarning === 'show' && isReady && isBlurred && (
+        <Styled.OutOfFocus>
+          <RiCursorFill />
+          Click or press any key to focus
+        </Styled.OutOfFocus>
+      )}
     </Styled.TypingTest>
   );
 };

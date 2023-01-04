@@ -31,8 +31,8 @@ interface State {
 
 const initialState: State = {
      testLanguage: {
-          name: 'english', // swap back to empty string
-          words: ["idris", "abdulhakeem"], // swap back to empty array
+          name: '', 
+          words: [], 
      },
      testWords: [],
      wordIndex: 0,
@@ -117,7 +117,12 @@ const typingTest = createSlice({
           },
 
 
-          resetTest: () => { }
+          resetTest: (state) => {
+              const {testLanguage} = state
+              Object.assign(state , initialState)
+              state.testLanguage = testLanguage
+
+           }
 
 
      }
