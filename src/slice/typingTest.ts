@@ -95,7 +95,9 @@ const typingTest = createSlice({
           },
 
 
-          setIsReady: () => { },
+          setIsReady: (state, action: PayloadAction<boolean>) => {
+               state.isReady = action.payload
+          },
 
 
           checkInput: (state, action: PayloadAction<{ value: string, config: SwiftTypes.Config }>) => { },
