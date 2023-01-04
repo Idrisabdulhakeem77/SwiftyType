@@ -111,6 +111,21 @@ const TypingTest = () => {
     setIsFocused(true)
     setIsBlurred(false)
   };
+ 
+
+  const handleKeyDown = ( e : KeyboardEvent) => {
+     if(['Tab', 'Escape', 'Enter'].includes(e.key) || e.key.match(/F\d*/)) return 
+     e.preventDefault()
+     focusWords()
+  }
+
+
+  const handleClick = () => {
+      const randomIndex = Math.floor(Math.random() * Object.keys(sprite).length)
+
+      playClickSound({id : randomIndex.toString()})
+  }
+
 
   const generateWords = (words: number) => {
     const newWords = [];
