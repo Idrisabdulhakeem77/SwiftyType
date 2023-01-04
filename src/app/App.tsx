@@ -17,6 +17,7 @@ import {
 import Styled, { GlobalStyle } from "./App.styled";
 import {CommandLine } from '../components'
 import {Footer , Header} from "../components";
+import { setTestLanguage } from "../slice/typingTest";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -62,9 +63,24 @@ const App = () => {
     }
   }, [dispatch, randomTheme, themeName, favoriteThemes]);
 
+
+
+
+  useEffect(() => {
+     (async () => {
+       const response = await  fetch(languageURL(language))
+    const {words} = await response.json()
+
+
+    dispatch(setTestLanguage({name : language , words}))
+
+
+     })()
+  } , [dispatch , language])
+
   return (
     <ThemeProvider theme={{ ...theme, fontFamily }}>
-      <LazyMotion features={domAnimation}>
+      <LazyMotion features={domAnimation} strict>
         <MotionConfig transition={{ opacity: { duration: transitionSpeed } }}>
           <GlobalStyle />
           <Styled.App>
@@ -94,5 +110,10 @@ const App = () => {
     </ThemeProvider>
   );
 };
+
+
+
+const languageURL = ( language : string ) => `https://raw.githubusercontent.com/monkeytypegame/
+monkeytype/master/frontend/static/languages/${language.replace(/\s/g , "_")}.json`
 
 export default App;

@@ -80,18 +80,27 @@ const typingTest = createSlice({
           setIsTestPopupOpen: (state, action: PayloadAction<boolean>) => {
                state.isTestPopupOpen = action.payload
           },
-          addTestWords: () => {
 
+          addTestWords: (state, action: PayloadAction<string[]>) => {
+               const testWords = action.payload.map((word) => ({
+                    original: word,
+                    isCorrect: false,
+                    letters: [...word].map((letter) => ({ original: letter })),
+               }));
+               state.testWords.push(...testWords);
+               state.isReady = true;
           },
-          setIsReady: () => { },
+
+          
+           setIsReady: () => { },
 
 
-          checkInput: (state , action : PayloadAction< { value : string , config : SwiftTypes.Config} > ) => { },
+          checkInput: (state, action: PayloadAction<{ value: string, config: SwiftTypes.Config }>) => { },
 
 
-          setIsTyping: ( state , action : PayloadAction<boolean>) => {
-               state.isTyping = action.payload 
-           },
+          setIsTyping: (state, action: PayloadAction<boolean>) => {
+               state.isTyping = action.payload
+          },
 
 
 

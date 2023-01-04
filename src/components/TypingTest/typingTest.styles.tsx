@@ -99,6 +99,9 @@ const Letter = styled.span<{
   transition: color 0.1s ease-out;
 `;
 
-const Styled = { TypingTest, Input, Wrapper, Caret  , Words , Word , Letter };
+
+const Typo = styled.div``
+
+const Styled = { TypingTest, Input, Wrapper, Caret  , Words , Word , Letter , Typo };
 
 export default Styled;

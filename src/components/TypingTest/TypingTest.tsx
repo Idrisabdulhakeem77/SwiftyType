@@ -73,6 +73,8 @@ const TypingTest = () => {
   const blurTimeOut = useRef<NodeJS.Timer>();
   const typingTimeOut = useRef<NodeJS.Timer>();
   const highestWordIndex = useRef(0);
+ 
+
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isReady) return;
@@ -92,6 +94,7 @@ const TypingTest = () => {
     typingTimeOut.current = setTimeout(() => {
       setIsTyping(false);
     }, 1000);
+
   };
 
   const blurWords = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -171,7 +174,13 @@ const TypingTest = () => {
                           (hideExtraLetters === "on" || blindMode === "on") &&
                           letter.status === "extra"
                         }
-                      ></Styled.Letter>
+                      >
+                         {blindMode === 'off' && indicateTypos === 'replace'
+                        ? letter.typed || letter.original : letter.original}
+                      {indicateTypos === 'below' && letter.status === 'incorrect' && (
+                        <Styled.Typo>{letter.typed}</Styled.Typo>
+                      )}
+                      </Styled.Letter>
                     ))}
                   </Styled.Word>
                 )
