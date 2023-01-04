@@ -14,7 +14,7 @@ import {
   startTest,
   resetTest,
 } from "../../slice/typingTest";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, useIsPresent } from "framer-motion";
 
 const TypingTest = () => {
@@ -105,7 +105,12 @@ const TypingTest = () => {
     setIsFocused(true);
   };
 
-  const focusWords = () => {};
+  const focusWords = () => {
+    clearTimeout(blurTimeOut.current)
+    input.current?.focus()
+    setIsFocused(true)
+    setIsBlurred(false)
+  };
 
   const generateWords = (words: number) => {
     const newWords = [];
@@ -119,7 +124,15 @@ const TypingTest = () => {
     }
 
     dispatch(addTestWords(newWords));
-  };
+  }; 
+ 
+
+  useEffect(() => {
+     if(!isPresent) {
+         dispatch(setIsReady(false))
+     }
+  } , [dispatch , isPresent])
+
 
   return (
     <Styled.TypingTest $fontSize={fontSize}>

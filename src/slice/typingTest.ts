@@ -85,11 +85,12 @@ const typingTest = createSlice({
                const testWords = action.payload.map((word) => ({
                     original: word,
                     isCorrect: false,
-                    letters: [...word].map((letter) => ({ origin: letter }))
+                    letters: [...word].map((letter) => ({ original: letter }))
                }))
 
-               state.isReady = true;
+
                state.testWords.push(...testWords)
+               state.isReady = true;
 
           },
 
