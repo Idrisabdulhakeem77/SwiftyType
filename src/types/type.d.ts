@@ -43,6 +43,9 @@ declare namespace SwiftTypes {
     }
 
     interface Word {
-         
+        original: string;
+        typed?: string;
+        isCorrect: boolean;
+        letters: Letter[];
     }
 }

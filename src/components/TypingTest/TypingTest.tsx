@@ -49,8 +49,7 @@ const TypingTest = () => {
     isTestPopupOpen,
   } = useAppSelector(({ type }) => type);
 
-  const dispatch = useAppDispatch()
-
+  const dispatch = useAppDispatch();
 
   const [isFocused, setIsFocused] = useState(false);
   const [isBlurred, setIsBlurred] = useState(true);
@@ -75,67 +74,81 @@ const TypingTest = () => {
   const typingTimeOut = useRef<NodeJS.Timer>();
   const highestWordIndex = useRef(0);
 
-  const inputHandler = ( e : React.ChangeEvent<HTMLInputElement>) => {
-     if(!isReady) return 
+  const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isReady) return;
 
-     const {value} = e.target
-     
+    const { value } = e.target;
 
-      
-     if(!isRunning) {
-         dispatch(startTest(performance.now()))
-     }
+    if (!isRunning) {
+      dispatch(startTest(performance.now()));
+    }
 
-      /// Checks if the value is the same as the correct 
-     dispatch(checkInput({value , config}))
-     dispatch(setIsTyping(true))
-    
-      clearTimeout(typingTimeOut.current)
-    
+    /// Checks if the value is the same as the correct
+    dispatch(checkInput({ value, config }));
+    dispatch(setIsTyping(true));
 
-      typingTimeOut.current = setTimeout(() =>  { setIsTyping(false)} , 1000)
+    clearTimeout(typingTimeOut.current);
+
+    typingTimeOut.current = setTimeout(() => {
+      setIsTyping(false);
+    }, 1000);
   };
 
-  const blurWords = ( e : React.FocusEvent<HTMLInputElement>) => {
-     e.preventDefault()
-     clearTimeout(blurTimeOut.current)
+  const blurWords = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    clearTimeout(blurTimeOut.current);
 
-     blurTimeOut.current = setTimeout(() => { setIsBlurred(true) } , 1000)
+    blurTimeOut.current = setTimeout(() => {
+      setIsBlurred(true);
+    }, 1000);
 
-     setIsFocused(true)
+    setIsFocused(true);
+  };
 
-
-  }
-
-
-  const focusWords = () => {
-
-  }
-
+  const focusWords = () => {};
 
   return (
     <Styled.TypingTest $fontSize={fontSize}>
-      <Styled.Input ref={input} value={inputValue} onChange={inputHandler} onBlur={blurWords}  />
+      <Styled.Input
+        ref={input}
+        value={inputValue}
+        onChange={inputHandler}
+        onBlur={blurWords}
+      />
       <AnimatePresence>
-          { isReady && (
-             <Styled.Wrapper
-              onClick={focusWords}
-             $blurred={outOfFocusWarning === "show" && isBlurred}
-             >
-               { isFocused && caretStyle !== "off" && (
-                  <Styled.Caret
-                  animate={{opacity: [1, isTyping ? 1 : 0, 1],}}
-                  
-                  
-                   $style={caretStyle}
-                  >
+        {isReady && (
+          <Styled.Wrapper
+            onClick={focusWords}
+            $blurred={outOfFocusWarning === "show" && isBlurred}
+          >
+            {isFocused && caretStyle !== "off" && (
+              <Styled.Caret
+                animate={{
+                  opacity: [1, isTyping ? 1 : 0, 1],
+                  top: caretPosition.x,
+                  left: caretPosition.y,
 
-                  </Styled.Caret>
-               )}
+                  transition: {
+                    opacity: {
+                      repeat: Infinity,
+                      ease:
+                        smoothCaret === "on" ? "easeInOut" : [1, -10, 0, 10],
+                      duration: 1,
+                    },
+                  },
+                }}
+                $style={caretStyle}
+              /> 
+            )}
+             <Styled.Words>
+                {testWords.map(({}) => (
+                   
+                ))}
+             </Styled.Words>
+            
 
-
-             </Styled.Wrapper>
-          )}
+          </Styled.Wrapper>
+        )}
       </AnimatePresence>
     </Styled.TypingTest>
   );
