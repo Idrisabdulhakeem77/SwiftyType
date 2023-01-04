@@ -48,4 +48,10 @@ declare namespace SwiftTypes {
         isCorrect: boolean;
         letters: Letter[];
     }
+
+    interface Letter {
+        original?: string;
+        typed?: string;
+        status?: 'correct' | 'incorrect' | 'extra'  | 'missed';
+    }
 }

@@ -62,6 +62,43 @@ const Words = styled(m.div).attrs(() => ( {
   
 `
 
-const Styled = { TypingTest, Input, Wrapper, Caret  , Words };
+
+
+const Word = styled.div<{ $error: boolean; }>`
+  margin-block: 2px;
+  display: flex;
+  border-bottom: 2px solid ${p => p.$error ? p.theme.colorfulError : 'transparent'};
+  transition: border-color 0.1s ease-out;
+`;
+
+const Letter = styled.span<{
+  $flipColors: boolean;
+  $colorful: boolean;
+  $status: SwiftTypes.Letter['status'];
+  $hidden: boolean;
+}>`
+  width: ${p => p.$hidden ? 0 : 'auto'};
+  position: relative;
+  display: inline-block;
+  visibility: ${p => p.$hidden ? 'hidden' : 'visible'};
+  color: ${p => {
+    const { main, sub, text, error, errorExtra, colorfulError, colorfulErrorExtra } = p.theme;
+    switch (p.$status) {
+      case 'correct':
+        if (p.$flipColors) return sub;
+        return p.$colorful ? main : text;
+      case 'incorrect':
+        return p.$colorful ? colorfulError : error;
+      case 'extra':
+        return p.$colorful ? colorfulErrorExtra : errorExtra;
+      default:
+        if (p.$flipColors) return p.$colorful ? main : text;
+        return sub;
+    }
+  }};
+  transition: color 0.1s ease-out;
+`;
+
+const Styled = { TypingTest, Input, Wrapper, Caret  , Words , Word , Letter };
 
 export default Styled;

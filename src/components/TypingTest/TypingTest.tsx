@@ -68,7 +68,7 @@ const TypingTest = () => {
 
   const isPresent = useIsPresent();
   const input = useRef<HTMLInputElement>(null);
-  const word = useRef<HTMLDivElement>(null);
+  const currentWord = useRef<HTMLDivElement>(null);
   const currentLetter = useRef<HTMLSpanElement>(null);
   const blurTimeOut = useRef<NodeJS.Timer>();
   const typingTimeOut = useRef<NodeJS.Timer>();
@@ -138,15 +138,45 @@ const TypingTest = () => {
                   },
                 }}
                 $style={caretStyle}
-              /> 
+              />
             )}
-             <Styled.Words>
-                {testWords.map(({}) => (
-                   
-                ))}
-             </Styled.Words>
-            
-
+            <Styled.Words>
+              {testWords.map(
+                ({ isCorrect, typed, original, letters }, index) => (
+                  <Styled.Word
+                    ref={wordIndex === index ? currentWord : null}
+                    key={`${original}-${index}`}
+                    $error={
+                      blindMode === "off" && wordIndex > index && !isCorrect
+                    }
+                  >
+                    {letters.map((letter, i) => (
+                      <Styled.Letter
+                        ref={
+                          wordIndex === index && (typed?.length || 0) - 1 === i
+                            ? currentLetter
+                            : null
+                        }
+                        key={i}
+                        $flipColors={flipTestColors === "on"}
+                        $colorful={colorfulMode === "on"}
+                        $status={
+                          blindMode === "on" &&
+                          (letter.status === "incorrect" ||
+                            letter.status === "missed")
+                            ? "correct"
+                            : letter.status
+                        }
+                        $hidden={
+                          (hideExtraLetters === "on" || blindMode === "on") &&
+                          letter.status === "extra"
+                        }
+                      ></Styled.Letter>
+                    ))}
+                  </Styled.Word>
+                )
+              )}
+            </Styled.Words>
           </Styled.Wrapper>
         )}
       </AnimatePresence>
