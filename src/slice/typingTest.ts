@@ -85,14 +85,16 @@ const typingTest = createSlice({
                const testWords = action.payload.map((word) => ({
                     original: word,
                     isCorrect: false,
-                    letters: [...word].map((letter) => ({ original: letter })),
-               }));
-               state.testWords.push(...testWords);
+                    letters: [...word].map((letter) => ({ origin: letter }))
+               }))
+
                state.isReady = true;
+               state.testWords.push(...testWords)
+
           },
 
-          
-           setIsReady: () => { },
+
+          setIsReady: () => { },
 
 
           checkInput: (state, action: PayloadAction<{ value: string, config: SwiftTypes.Config }>) => { },

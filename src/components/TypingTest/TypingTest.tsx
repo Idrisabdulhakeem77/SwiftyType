@@ -73,8 +73,6 @@ const TypingTest = () => {
   const blurTimeOut = useRef<NodeJS.Timer>();
   const typingTimeOut = useRef<NodeJS.Timer>();
   const highestWordIndex = useRef(0);
- 
-
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isReady) return;
@@ -94,7 +92,6 @@ const TypingTest = () => {
     typingTimeOut.current = setTimeout(() => {
       setIsTyping(false);
     }, 1000);
-
   };
 
   const blurWords = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -109,6 +106,20 @@ const TypingTest = () => {
   };
 
   const focusWords = () => {};
+
+  const generateWords = (words: number) => {
+    const newWords = [];
+
+    while (newWords.length < words) {
+      const randomIndex = Math.floor(Math.random() * testLanguage.words.length);
+
+      const word = testLanguage.words[randomIndex];
+
+      newWords.push(word);
+    }
+
+    dispatch(addTestWords(newWords));
+  };
 
   return (
     <Styled.TypingTest $fontSize={fontSize}>
@@ -175,11 +186,13 @@ const TypingTest = () => {
                           letter.status === "extra"
                         }
                       >
-                         {blindMode === 'off' && indicateTypos === 'replace'
-                        ? letter.typed || letter.original : letter.original}
-                      {indicateTypos === 'below' && letter.status === 'incorrect' && (
-                        <Styled.Typo>{letter.typed}</Styled.Typo>
-                      )}
+                        {blindMode === "off" && indicateTypos === "replace"
+                          ? letter.typed || letter.original
+                          : letter.original}
+                        {indicateTypos === "below" &&
+                          letter.status === "incorrect" && (
+                            <Styled.Typo>{letter.typed}</Styled.Typo>
+                          )}
                       </Styled.Letter>
                     ))}
                   </Styled.Word>
