@@ -16,6 +16,8 @@ const Keymap = () => {
 
   const [shift, setShift] = useState(false);
   const [keys, setKeys] = useState<Key[]>([]);
+  const [isUpperCase , setIsUpperCase] = useState(false)
+  
 
   const getLegend = (char: string) => {
     switch (keymapLegendStyle) {
@@ -45,6 +47,38 @@ const Keymap = () => {
 
     setKeys(newkeys)
   }
+
+
+  const handleCapsLockShift = ( e : KeyboardEvent) => {
+     
+    if(e.key === "CapsLock") {
+         setIsUpperCase(e.getModifierState('CapsLock'))
+    }  else if ( e.key === 'Shift') {
+          setIsUpperCase(e.getModifierState('CapsLock') !== e.getModifierState('Shift') )
+
+          setShift(e.getModifierState('Shift'))
+    }
+
+
+
+  }
+
+
+
+
+  useEventListener( keymap === 'react' ? window : null , 'keyup' , toggleActive )
+
+
+  useEventListener( keymap === 'react' ? window : null , 'keydown' , toggleActive )
+
+
+  useEventListener( keymapLegendStyle === 'dynamic' ? window : null , 'keyup' , toggleActive )
+
+
+  useEventListener( keymapLegendStyle === 'dynamic' ? window : null , 'keydown' , toggleActive )
+
+
+
 
 
 
