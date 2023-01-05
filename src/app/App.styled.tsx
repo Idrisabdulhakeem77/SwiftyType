@@ -20,6 +20,7 @@ const App = styled.div`
   font-family: ${(p) => p.theme.fontFamily || "sans-serif"};
   background-color: ${(p) => p.theme.bg};
   transition-property: background-color;
+   overflow: hidden;
 `;
 
 const Content = styled.div`
