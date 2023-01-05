@@ -1,7 +1,7 @@
 import Styled from "./Home.styles";
 import { AnimatePresence } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { Loading, TestResults  , TestStats  ,TypingTest } from "../../components";
+import { Keymap, Loading, TestResults  , TestStats  ,TypingTest } from "../../components";
 import { Button, Popup, Input, Key } from "../../components/ui";
 import { RiGlobeFill, RiTerminalLine } from "react-icons/ri";
 import { setIsTestPopupOpen } from "../../slice/typingTest";
@@ -53,7 +53,9 @@ const Home = ({ setRandomTheme }: HomeProps) => {
               )}
             </AnimatePresence>
             <TestStats/>
-            <TypingTest/>
+            {/* <TypingTest/> */}
+
+            { keymap !== 'off' && <Keymap/>}
           </Styled.Wrapper>
         )}
       </AnimatePresence>

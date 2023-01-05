@@ -57,14 +57,18 @@ const TypingTest = () => {
   const [caretPosition, setCaretPosition] = useState({ x: 0, y: 0 });
 
   const url = sounds[soundOnClick]?.url;
-  const sprite = sounds[soundOnClick]?.spirite;
+  const sprite = sounds[soundOnClick]?.sprite;
+
+
 
   const [playClickSound, { sound: clickSound }] = useSound(
-    `${process.env.PUBLIC_URL}/assets/sounds/${url ?? "click.wav"}`
+    `${process.env.PUBLIC_URL}/assets/sounds/${url ?? "click.wav"}` ,
+    {sprite}
   );
 
   const [playErrorSound, { sound: clickError }] = useSound(
-    `${process.env.PUBLIC_URL}/assets/sounds/${url ?? "error.wav"}`
+    `${process.env.PUBLIC_URL}/assets/sounds/${url ?? "error.wav"}` ,
+    {sprite}
   );
 
   const isPresent = useIsPresent();
@@ -75,24 +79,46 @@ const TypingTest = () => {
   const typingTimeOut = useRef<NodeJS.Timer>();
   const highestWordIndex = useRef(0);
 
+  // const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (!isReady) return;
+
+    
+
+  //   const { value } = e.target;
+
+  //   if (!isRunning) {
+  //     dispatch(startTest(performance.now()));
+  //   }
+
+  //   /// Checks if the value is the same as the correct
+  //   dispatch(checkInput({ value, config }));
+  //   dispatch(setIsTyping(true));
+
+  //   clearTimeout(typingTimeOut.current);
+
+  //   typingTimeOut.current = setTimeout(() => {
+  //     setIsTyping(false);
+  //   }, 1000);
+  // };
+
+
+
+
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isReady) return;
-
     const { value } = e.target;
 
+    console.log(value)
+    
     if (!isRunning) {
       dispatch(startTest(performance.now()));
     }
-
-    /// Checks if the value is the same as the correct
     dispatch(checkInput({ value, config }));
     dispatch(setIsTyping(true));
 
     clearTimeout(typingTimeOut.current);
 
-    typingTimeOut.current = setTimeout(() => {
-      setIsTyping(false);
-    }, 1000);
+    typingTimeOut.current = setTimeout(() => dispatch(setIsTyping(false)), 1000);
   };
 
   const blurWords = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -120,8 +146,12 @@ const TypingTest = () => {
     focusWords();
   };
 
-  const handleClick = () => {
+
+  const playKeySound = () => {
+
     const randomIndex = Math.floor(Math.random() * Object.keys(sprite).length);
+
+    // console.log(randomIndex)
 
     playClickSound({ id: randomIndex.toString() });
   };
@@ -171,6 +201,33 @@ const TypingTest = () => {
     clickSound?.volume(soundVolume);
     clickError?.volume(soundVolume);
   }, [soundVolume, clickError, clickSound]);
+
+  useEffect(() => {
+    const top = currentWord.current?.offsetTop || 0;
+    const left = currentLetter.current
+      ? currentLetter.current?.offsetLeft + currentLetter.current?.offsetWidth
+      : currentWord.current?.offsetLeft || 0;
+
+    currentWord.current?.scrollIntoView({
+      behavior: smoothLineScroll === "on" ? "smooth" : "auto",
+      block: "center",
+    });
+
+    setCaretPosition({ x: left, y: top });
+  }, [smoothLineScroll, fontSize, inputValue, wordIndex]);
+
+  useEventListener(
+    !isFocused && !commandLine.isOpen && !isTestPopupOpen ? window : null,
+    "keydown",
+    handleKeyDown
+  );
+
+
+  useEventListener(
+    soundOnClick !== 'off' && isFocused ? window : null, 
+     'keydown' ,
+     playKeySound
+  )
 
   return (
     <Styled.TypingTest $fontSize={fontSize}>
@@ -265,12 +322,11 @@ const TypingTest = () => {
           <RiLockFill />
           Caps Lock
         </Styled.CapLock>
-      )} 
+      )}
 
-       
-       {/* When the Windows is blurred */}
+      {/* When the Windows is blurred */}
 
-      {outOfFocusWarning === 'show' && isReady && isBlurred && (
+      {outOfFocusWarning === "show" && isReady && isBlurred && (
         <Styled.OutOfFocus>
           <RiCursorFill />
           Click or press any key to focus
