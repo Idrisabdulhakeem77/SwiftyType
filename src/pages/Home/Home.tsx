@@ -53,7 +53,7 @@ const Home = ({ setRandomTheme }: HomeProps) => {
               )}
             </AnimatePresence>
             <TestStats/>
-            {/* <TypingTest/> */}
+            <TypingTest/>
 
             { keymap !== 'off' && <Keymap/>}
           </Styled.Wrapper>
