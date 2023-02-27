@@ -107,8 +107,6 @@ const TypingTest = () => {
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isReady) return;
     const { value } = e.target;
-
-    console.log(value)
     
     if (!isRunning) {
       dispatch(startTest(performance.now()));

@@ -32,7 +32,6 @@ const Keymap = styled.div<{ $split: boolean ,  $isMobile : boolean  }>`
   align-items: center;
   justify-content: center;
   gap: 4px;
-  border: solid 1px red;
 
   > ${Row} > ${Key}:nth-child(5) {
     margin-right: ${(p) => (p.$split ? 36 : 0)}px;

@@ -47,7 +47,7 @@ function Keymap() {
     const newKeys = [...keys];
 
     newKeys[keyIndex].isActive = e.type === 'keydown';
-
+    
     setKeys(newKeys);
   };
 
@@ -63,20 +63,21 @@ function Keymap() {
       setShift(e.getModifierState('Shift'));
     }
   };
+ 
+
+ useEffect(() => {
+    const characters = [...layouts[keymapLayout]]
+     
+
+     if (keymapStyle.match(/matrix/g)) {
+      characters.splice(10, 2, '', '');
+      characters.splice(22, 1, '');
+    } 
+
+    setKeys(characters.map((character) => ( { char : character , isActive : character.includes(lastLetter.current)} )))
 
 
-  useEffect(() => {
-    const chars = [...layouts[keymapLayout]];
-
-    if (keymapStyle.match(/matrix/g)) {
-      chars.splice(10, 2, '', '');
-      chars.splice(22, 1, '');
-    }
-
-    setKeys(chars.map((char) => ({ char, isActive: char.includes(lastLetter.current) })));
-
-    
-  }, [keymapLayout, keymapStyle]);
+ } , [keymapLayout , keymapStyle]) 
 
 
 

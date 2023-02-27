@@ -3,6 +3,8 @@ import appReducer from '../slice/app'
 import configReducer from '../slice/config'
 import typeTestingReducer from '../slice/typingTest'
 
+ 
+
 
 const store = configureStore({
     reducer: {
@@ -11,6 +13,7 @@ const store = configureStore({
         type: typeTestingReducer
     }
 })
+
 
 
 export type RootState = ReturnType<typeof store.getState>;

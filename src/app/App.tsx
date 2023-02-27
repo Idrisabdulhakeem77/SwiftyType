@@ -4,7 +4,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { Home } from "../pages";
 import { useCallback, useEffect } from "react";
 import themes from "../themes/_list";
-import { setTheme } from "../slice/app";
+import { setCapsLock, setTheme } from "../slice/app";
 import { setThemeName } from "../slice/config";
 
 import {
@@ -17,6 +17,7 @@ import Styled, { GlobalStyle } from "./App.styled";
 import { CommandLine } from "../components";
 import { Footer, Header } from "../components";
 import { setTestLanguage } from "../slice/typingTest";
+import useEventListener from "use-typed-event-listener";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -36,6 +37,10 @@ const App = () => {
     randomTheme,
     favoriteThemes,
   } = config;
+
+  const handleCapsLock = (e: KeyboardEvent) => {
+    dispatch(setCapsLock(e.getModifierState("CapsLock")));
+  };
 
   // Default value for the randomTheme is "on"
   const setRandomTheme = useCallback(async () => {
@@ -62,6 +67,10 @@ const App = () => {
   }, [dispatch, randomTheme, themeName, favoriteThemes]);
 
   useEffect(() => {
+    localStorage.setItem("config", JSON.stringify(config));
+  }, [config]);
+
+  useEffect(() => {
     (async () => {
       const response = await fetch(languageURL(language));
       const { words } = await response.json();
@@ -69,6 +78,8 @@ const App = () => {
       dispatch(setTestLanguage({ name: language, words }));
     })();
   }, [dispatch, language]);
+
+  useEventListener(window, "keyup", handleCapsLock);
 
   return (
     <ThemeProvider theme={{ ...theme, fontFamily }}>
